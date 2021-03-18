@@ -1,14 +1,3 @@
-// This was moved to stage and prod.
-//terraform {
-//	# Only the 'key' parameter remains in the Terraform code, since you still need to set a different 'key' value for each module.
-//	# All the other repeated 'backend' arguments, such as 'bucket' and 'region', into a separate file called backend.hcl.
-//	backend "s3" {
-//		# Terraform will create the key path automatically.
-//		# Variables aren't allowed in a backend configuration.
-//		key = "stage/services/webserver-cluster/terraform.tfstate"
-//	}
-//}
-
 # Under the hood, the information provided by data source is fetched by calling AWS API.
 data "aws_vpc" "default" {
 	# Direct Terraform to lookup the default VPC in your AWS account
