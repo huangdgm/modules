@@ -1,3 +1,5 @@
+# The values of variables defined in this file are either provided in the definitions themselves(using the 'default' vaule,
+# or in the 'root modules' such as the stage or prod.
 variable "region" {
 	type = string
 	default = "us-east-2"
@@ -41,4 +43,20 @@ variable "min_size" {
 variable "max_size" {
 	type = number
 	description = "The maximum number of EC2 instances in the ASG"
+}
+
+variable "custom_tags" {
+	type = map(string)
+	default = {}
+	description = "Custom tags to set on the instance in the ASG"
+}
+
+variable "enable_autoscaling" {
+	description = "If set to true, enable auto scaling"
+	type = bool
+}
+
+variable "enable_new_user_data" {
+	description = "If set to true, use the new user data script"
+	type = bool
 }
