@@ -90,12 +90,10 @@ resource "aws_launch_configuration" "example" {
   # Note that the two 'template_file' data sources are both arrays, as they both use the 'count' parameter.
   # However, as one of these arrays will be of length 1 and the other of length 0, you can't directly access a specific index,
   # because that array might be empty.
-//  user_data = length(data.template_file.user_data[*]) > 0
-//            ? data.template_file.user_data[0].rendered
-//            : data.template_file.user_data_new[0].rendered
-
-  user_data = data.template_file.user_data[0].rendered
-
+  user_data = length(data.template_file.user_data[*]) > 0
+            ? data.template_file.user_data[0].rendered
+            : data.template_file.user_data_new[0].rendered
+  
   lifecycle {
     create_before_destroy = true
   }
