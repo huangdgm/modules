@@ -12,7 +12,7 @@ sudo find /var/www -type f -exec chmod 0664 {} \;
 sudo echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
 # Note that you don't need any prefix to access these variables: for example, you should use 'server_port' and not 'var.server_port'.
 sudo echo "<p>User Data Old</p>" >> /var/www/html/mysqlinfo.php
-sudo echo "<p>ALB DNS name: ${alb_dns_name}</p>" >> /var/www/html/mysqlinfo.php
+# sudo echo "<p>ALB DNS name: ${alb_dns_name}</p>" >> /var/www/html/mysqlinfo.php
 sudo echo "<p>ALB listener port: ${alb_listener_port}</p>" >> /var/www/html/mysqlinfo.php
 sudo echo "<p>DB address: ${db_address}</p>" >> /var/www/html/mysqlinfo.php
 sudo echo "<p>DB port: ${db_port}</p>" >> /var/www/html/mysqlinfo.php
