@@ -44,6 +44,7 @@ data "template_file" "user_data" {
     // because the state of webserver-cluster has no info regarding 'alb_dns_name.
     // This is unlike 'db_address' or 'db_port' which were created before.
     // alb_dns_name = data.terraform_remote_state.webserver-cluster.outputs.alb_dns_name
+    alb_dns_name = local.http_port
     alb_listener_port = local.http_port
     // To reference another variable prefixed with 'var'.
     db_address = data.terraform_remote_state.db.outputs.address
@@ -63,6 +64,7 @@ data "template_file" "user_data_new" {
     // because the state of webserver-cluster has no info regarding 'alb_dns_name.
     // This is unlike 'db_address' or 'db_port' which were created before.
     // alb_dns_name = data.terraform_remote_state.webserver-cluster.outputs.alb_dns_name
+    alb_dns_name = local.http_port
     alb_listener_port = local.http_port
     // To reference another variable prefixed with 'var'.
     db_address = data.terraform_remote_state.db.outputs.address
