@@ -49,6 +49,7 @@ data "template_file" "user_data" {
     // To reference another variable prefixed with 'var'.
     db_address = data.terraform_remote_state.db.outputs.address
     db_port = data.terraform_remote_state.db.outputs.port
+    server_text = var.server_text
   }
 }
 
@@ -69,6 +70,7 @@ data "template_file" "user_data_new" {
     // To reference another variable prefixed with 'var'.
     db_address = data.terraform_remote_state.db.outputs.address
     db_port = data.terraform_remote_state.db.outputs.port
+    server_text = var.server_text
   }
 }
 
@@ -85,7 +87,7 @@ locals {
 }
 
 resource "aws_launch_configuration" "example" {
-  image_id = "ami-07a0844029df33d7d"
+  image_id = var.ami
   instance_type = var.instance_type
   security_groups = [aws_security_group.instance.id]
 
@@ -104,15 +106,28 @@ resource "aws_launch_configuration" "example" {
 }
 
 resource "aws_autoscaling_group" "example" {
+  # Explicitly depend on the launch configuration's name so each time it's
+  # replaced, this ASG is also replaced.
+  name = "${var.cluster-name}-${aws_launch_configuration.example.name}"
+
   launch_configuration = aws_launch_configuration.example.name
   vpc_zone_identifier = data.aws_subnet_ids.default.ids
 
-  target_group_arns = [
-    aws_lb_target_group.asg.arn]
+  target_group_arns = [aws_lb_target_group.asg.arn]
   health_check_type = "ELB"
 
   min_size = var.min_size
   max_size = var.max_size
+
+  # Set the 'min_elb_capacity' parameter of the ASG to the min_size of the cluster
+  # so that Terraform will wait for at least that many servers from the new ASG to pass
+  # health checks in the ALB before it will begin destroying the original ASG.
+  min_elb_capacity = var.min_size
+
+  # When replacing this ASG, create the replacement first, and only delete the original after
+  lifecycle {
+    create_before_destroy = true
+  }
 
   tag {
     key = "Name"

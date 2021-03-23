@@ -60,3 +60,15 @@ variable "enable_new_user_data" {
 	description = "If set to true, use the new user data script"
 	type = bool
 }
+
+variable "ami" {
+	description = "The AMI to run in the cluster"
+	default = "ami-07a0844029df33d7d"
+	type = string
+}
+
+variable "server_text" {
+	description = "The text the web server should return for the demonstration purpose"
+	default = "Hello, world"
+	type = string
+}
