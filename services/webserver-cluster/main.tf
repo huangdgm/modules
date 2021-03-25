@@ -33,6 +33,16 @@ data "terraform_remote_state" "webserver-cluster" {
 
 # Externalize the user data file.
 data "template_file" "user_data" {
+  // Limitations of 'count' and 'for_each':
+  // 1. Terraform requires that it can compute 'count' and 'for_each' during the plan phase, before any
+  // resources are created or modified. This means that count and for_each can reference hardcoded values,
+  // variables, data sources, and even list of resources (so long as the length of the list can be
+  // determined during plan), but not computed resource outputs.
+  // For example, count cannot reference an random integer data source as the value of this random integer
+  // cannot be determined during the plan phase.
+  // 2. You cannot use count or for_each within a module configuration. Note this feature might be supported
+  // in a future terraform release. Refer to changelog in the following url:
+  // https://github.com/hashicorp/terraform/blob/v0.14/CHANGELOG.md
   count = var.enable_new_user_data ? 0 : 1
 
   template = file("${path.module}/user-data.sh")
