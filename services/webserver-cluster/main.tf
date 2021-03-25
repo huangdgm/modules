@@ -134,7 +134,20 @@ resource "aws_autoscaling_group" "example" {
   # health checks in the ALB before it will begin destroying the original ASG.
   min_elb_capacity = var.min_size
 
-  # When replacing this ASG, create the replacement first, and only delete the original after
+  # When replacing this ASG, create the replacement first, and only delete the original after.
+  # The 'lifecycle' combined with the 'name' makes the zero-downtime deployment possible.
+  # But, there is a limitation of zero-downtime deployment.
+  # After each deployment, it resets your ASG size back to its 'min_size' regardless of how many
+  # EC2 instances are running prior to the deployment. This will cause a problem because the number
+  # of EC2 instances will remain unchanged until hitting the 'aws_autoscaling_schedule'.
+  # However, there are two possible workarounds:
+  # 1. Change the recurrence parameter on the aws_autoscaling_schedule from 0 9 * * *, which means
+  # "run at 9 a.m." to something like 0-59 9-17 * * *, which means "run every minute from 9 a.m. to
+  # 5 p.m." This approach is a bit of a hack, and the big jump from 10 servers to 2 servers back to
+  # 10 servers can still cause issues for your users.
+  # 2. Create a custom script that uses the AWS API to figure out how many servers are running in the
+  # ASG, call this script using an external data source, and set the 'desired_capacity' parameter of
+  # the ASG to the value returned by this script.
   lifecycle {
     create_before_destroy = true
   }
