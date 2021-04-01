@@ -133,6 +133,7 @@ module "asg" {
 
 module "alb" {
   source = "../../networking/alb"
+
   alb_name = "hello-world-${var.environment}"
   subnet_ids = data.aws_subnet_ids.default.ids
 }
