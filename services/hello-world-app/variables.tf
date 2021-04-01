@@ -1,5 +1,7 @@
 # The values of variables defined in this file are either provided in the definitions themselves(using the 'default' vaule,
 # or in the 'root modules' such as the stage or prod.
+# Please note that some of the variables are duplicated from other modules. This is necessary because
+# the current module invoke other modules.
 
 # ---------------------------------------------------------------------------------------------------------------------
 # REQUIRED PARAMETERS
