@@ -20,7 +20,7 @@ func TestAlbExample(t *testing.T) {
     defer terraform.Destroy(t, opts)
 
     // Deploy the example
-    terraform.InitAndApply(t.opts)
+    terraform.InitAndApply(t, opts)
 
     // Get the URL of the ALB
     albDnsName := terraform.OutputRequired(t, opts, "alb_dns_name")
