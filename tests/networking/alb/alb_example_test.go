@@ -38,6 +38,7 @@ func TestAlbExample(t *testing.T) {
     http_helper.HttpGetWithRetry(
         t,
         url,
+        nil,
         expectedStatus,
         expectedBody,
         maxRetries,
