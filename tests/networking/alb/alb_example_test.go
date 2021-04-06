@@ -39,6 +39,6 @@ func TestAlbExample(t *testing.T) {
         expectedStatus,
         expectedBody,
         maxRetries,
-        timeBetweenRetries
+        timeBetweenRetries,
     )
 }
