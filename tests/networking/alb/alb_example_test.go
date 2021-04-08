@@ -4,7 +4,6 @@ import (
     "fmt"
     "github.com/gruntwork-io/terratest/modules/terraform"
     "github.com/gruntwork-io/terratest/modules/http-helper"
-    "github.com/gruntwork-io/terratest/modules/random"
     "testing"
     "time"
 )
