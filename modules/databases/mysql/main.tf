@@ -10,6 +10,7 @@ resource "aws_db_instance" "example" {
   identifier_prefix = var.identifier_prefix
   allocated_storage = var.allocated_storage
   name              = var.db_name
+  skip_final_snapshot = true
 
   username = "admin"
 
