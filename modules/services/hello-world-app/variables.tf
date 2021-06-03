@@ -17,15 +17,15 @@ variable "db_remote_state_key" {
 	description = "The path for the db's remote state in S3"
 }
 
-variable "webserver_remote_state_bucket" {
-	type = string
-	description = "The name of the S3 bucket for the webserver's remote state"
-}
-
-variable "webserver_remote_state_key" {
-	type = string
-	description = "The path for the webserver's remote state in S3"
-}
+//variable "webserver_remote_state_bucket" {
+//	type = string
+//	description = "The name of the S3 bucket for the webserver's remote state"
+//}
+//
+//variable "webserver_remote_state_key" {
+//	type = string
+//	description = "The path for the webserver's remote state in S3"
+//}
 
 variable "enable_new_user_data" {
 	description = "If set to true, use the new user data script"

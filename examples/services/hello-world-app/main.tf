@@ -6,7 +6,6 @@ provider "aws" {
 }
 
 terraform {
-  # Require Terraform at exactly version 0.14.8.
   required_version = "=0.15.3"
 
   # Only the 'key' parameter remains in the Terraform code, since you still need to set a different 'key' value for each module.
@@ -14,25 +13,21 @@ terraform {
   backend "s3" {
     # Terraform will create the key path automatically.
     # Variables aren't allowed in a backend configuration.
-    key = "modules/examples/cluster/asg-rolling-deploy/terraform.tfstate"
+    key = "modules/examples/services/hello-world-app/terraform.tfstate"
   }
 }
 
-module "asg" {
-  source = "../../../modules/cluster/asg-rolling-deploy"
+module "hello_world_app" {
+  // Instead of referring to source in Git, you can simply choose to refer to source in the local.
+  // As opposed to referring to local source, you should always to refer to Git as source in your
+  // stage, prod, etc.
+  source = "../../../modules/services/hello-world-app"
 
-  cluster-name = "test"
+  db_remote_state_bucket = "terraform3-up-and-running"
+  db_remote_state_key = "modules/examples/databases/mysql/terraform.tfstate"
   enable_autoscaling = false
-  instance_type = "t2.micro"
+  enable_new_user_data = false
+  environment = "example"
   max_size = 2
-  min_size = 1
-  subnet_ids = data.aws_subnet_ids.default.ids
-}
-
-data "aws_vpc" "default" {
-  default = true
-}
-
-data "aws_subnet_ids" "default" {
-  vpc_id = data.aws_vpc.default.id
+  min_size = 2
 }

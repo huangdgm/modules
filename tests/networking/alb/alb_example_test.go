@@ -9,6 +9,9 @@ import (
 )
 
 func TestAlbExample(t *testing.T) {
+    // You are testing the code in 'examples', not the code in 'modules', due to the fact that
+    // 'examples' provides you with tangible infrastructure while the 'modules' provides you
+    // with some 'templates'.
     opts := &terraform.Options{
         TerraformDir: "../../../examples/networking/alb",
     }
