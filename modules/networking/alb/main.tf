@@ -1,3 +1,7 @@
+terraform {
+  required_version = "=0.15.3"
+}
+
 # Although it is a good practice to use input variables to allow, e.g. stage, prod, to specify their own values,
 # we still need a way to define a variable in your module to do some intermediary calculation, or just to keep your code DRY,
 # but you don't want to expose that variable as a configurable input.

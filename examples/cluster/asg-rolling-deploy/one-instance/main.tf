@@ -19,12 +19,12 @@ terraform {
 }
 
 module "asg" {
-  source = "../../../modules/cluster/asg-rolling-deploy"
+  source = "..\/..\/..\/..\/modules\/cluster\/asg-rolling-deploy"
 
   cluster-name = "test"
   enable_autoscaling = false
   instance_type = "t2.micro"
-  max_size = 2
+  max_size = 1
   min_size = 1
   subnet_ids = data.aws_subnet_ids.default.ids
 }

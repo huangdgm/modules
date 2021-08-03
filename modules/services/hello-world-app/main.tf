@@ -1,3 +1,7 @@
+terraform {
+  required_version = "=0.15.3"
+}
+
 # Under the hood, the information provided by data source is fetched by calling AWS API.
 data "aws_vpc" "default" {
   # Direct Terraform to lookup the default VPC in your AWS account
