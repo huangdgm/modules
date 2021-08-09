@@ -1,11 +1,16 @@
 provider "aws" {
   region = "us-east-2"
-
-  # Allow any 3.35.x version of the AWS provider
-  version = "~> 3.35.0"
 }
 
 terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      # Allow any 3.35.x version of the AWS provider
+      version = "~> 3.35.0"
+    }
+  }
+
   required_version = "=0.15.3"
 
   # Only the 'key' parameter remains in the Terraform code, since you still need to set a different 'key' value for each module.
