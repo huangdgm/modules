@@ -121,7 +121,9 @@ module "asg" {
 
   cluster-name = "hello-world-${var.environment}"
   ami = var.ami
-  user_data = data.template_file.user_data[0].rendered
+  user_data = length(data.template_file.user_data[*]) > 0
+    ? data.template_file.user_data[0].rendered
+    : data.template_file.user_data_new[0].rendered
   instance_type = var.instance_type
 
   min_size = var.min_size
