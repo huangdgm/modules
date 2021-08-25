@@ -6,13 +6,13 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      # Allow any 3.35.x version of the AWS provider
-      version = "~> 3.35.0"
+      # Allow any 3.33.x version of the AWS provider
+      version = "~> 3.33.0"
     }
   }
 
   # Require Terraform at exactly version 0.14.8.
-  required_version = "=0.15.3"
+  required_version = "=1.0.2"
 
   # Only the 'key' parameter remains in the Terraform code, since you still need to set a different 'key' value for each module.
   # All the other repeated 'backend' arguments, such as 'bucket' and 'region', into a separate file called backend.hcl.

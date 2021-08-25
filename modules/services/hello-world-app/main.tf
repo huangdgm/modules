@@ -1,5 +1,5 @@
 terraform {
-  required_version = "=0.15.3"
+  required_version = "=1.0.2"
 }
 
 # Under the hood, the information provided by data source is fetched by calling AWS API.

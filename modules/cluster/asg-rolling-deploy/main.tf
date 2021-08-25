@@ -1,5 +1,5 @@
 terraform {
-  required_version = "=0.15.3"
+  required_version = "=1.0.2"
 }
 
 # Although it is a good practice to use input variables to allow, e.g. stage, prod, to specify their own values,
@@ -10,6 +10,7 @@ locals {
   any_port = 0
   any_protocol = "-1"
   tcp_protocol = "tcp"
+  # If you need to specify a specific IP: e.g., ["${aws_eip.example.public_ip}/32"]
   all_ips = ["0.0.0.0/0"]
 }
 

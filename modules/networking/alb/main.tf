@@ -1,5 +1,5 @@
 terraform {
-  required_version = "=0.15.3"
+  required_version = "=1.0.2"
 }
 
 # Although it is a good practice to use input variables to allow, e.g. stage, prod, to specify their own values,
